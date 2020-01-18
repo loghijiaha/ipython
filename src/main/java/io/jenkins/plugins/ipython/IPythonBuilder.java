@@ -21,12 +21,11 @@ import java.io.IOException;
 public class IPythonBuilder extends Builder implements SimpleBuildStep {
 
     private final String line;
-    private IPythonKernalInterepreter interpreter;
+    private IPythonKernalInterepreter interpreter = IPythonKernalInterepreter.getInstance();
 
     @DataBoundConstructor
     public IPythonBuilder(String line) throws Exception {
         this.line = line;
-        interpreter= IPythonKernalInterepreter.getInstance();
     }
 
     public String getLine() {
@@ -36,11 +35,13 @@ public class IPythonBuilder extends Builder implements SimpleBuildStep {
     @Override
     public void perform(Run<?, ?> run, FilePath workspace, Launcher launcher, TaskListener listener) throws InterruptedException, IOException {
 
-//        listener.getLogger().println(interpreter.sendAndInterpret(line));
+        listener.getLogger().println(interpreter.sendAndInterpret(line));
     }
 
     @Extension
     public static final class DescriptorImpl extends BuildStepDescriptor<Builder> {
+
+
 
         public FormValidation doCheckLine(@QueryParameter String value) {
             if (value.length() == 0)
