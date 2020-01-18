@@ -70,15 +70,4 @@ public class IPythonKernalInterepreter {
     public void shutdown() throws InterpreterException {
         interpreter.close();
     }
-    public static void main(String[] args) throws Exception {
-        try {
-            IPythonKernalInterepreter o = IPythonKernalInterepreter.getInstance();
-            System.out.println(o.sendAndInterpret("print(5)"));
-            System.out.println(o.sendAndInterpret("print(78)"));
-            Thread.sleep(100);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
