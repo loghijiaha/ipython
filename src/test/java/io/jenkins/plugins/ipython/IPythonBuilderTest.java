@@ -10,7 +10,7 @@ public class IPythonBuilderTest {
            @Rule
     public JenkinsRule jenkins = new JenkinsRule();
 
-    final String name = "Bobby";
+    final String name = "%text 5";
 
     @Test
     public void testConfigRoundtrip() throws Exception {
@@ -25,7 +25,8 @@ public class IPythonBuilderTest {
     @Test
     public void testBuild() throws Exception {
         FreeStyleProject project = jenkins.createFreeStyleProject();
-        IPythonBuilder builder = new IPythonBuilder(name);
+        IPythonBuilder builder =
+                new IPythonBuilder(name);
         project.getBuildersList().add(builder);
 
         FreeStyleBuild build = jenkins.buildAndAssertSuccess(project);

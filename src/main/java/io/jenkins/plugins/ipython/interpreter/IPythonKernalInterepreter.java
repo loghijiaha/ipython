@@ -2,6 +2,7 @@ package io.jenkins.plugins.ipython.interpreter;
 
 import org.apache.zeppelin.display.GUI;
 import org.apache.zeppelin.interpreter.*;
+
 import org.apache.zeppelin.python.IPythonInterpreter;
 import org.apache.zeppelin.user.AuthenticationInfo;
 
