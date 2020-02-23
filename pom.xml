@@ -38,18 +38,48 @@
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/org.apache.zeppelin/zeppelin-interpreter -->
-<!--        <dependency>-->
-<!--            <groupId>org.apache.zeppelin</groupId>-->
-<!--            <artifactId>zeppelin-interpreter</artifactId>-->
-<!--            <version>0.8.2</version>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <groupId>com.google.code.gson</groupId>-->
-<!--                    <artifactId>gson</artifactId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>org.apache.zeppelin</groupId>
+            <artifactId>zeppelin-interpreter</artifactId>
+            <version>0.8.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.google.code.gson</groupId>
+                    <artifactId>gson</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.grpc</groupId>
+                    <artifactId>grpc-netty</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.grpc</groupId>
+                    <artifactId>grpc-protobuf</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>io.grpc</groupId>
+                    <artifactId>grpc-stub</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
+                </exclusion>
+
+                    <exclusion>
+                        <groupId>org.codehaus.plexus</groupId>
+                        <artifactId>plexus-utils</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.sonatype.sisu</groupId>
+                        <artifactId>sisu-inject-plexus</artifactId>
+                    </exclusion>
+                    <exclusion>
+                        <groupId>org.apache.maven</groupId>
+                        <artifactId>maven-model</artifactId>
+                    </exclusion>
+
+            </exclusions>
+
+        </dependency>
 
 
         <!-- https://mvnrepository.com/artifact/org.apache.zeppelin/zeppelin-python -->
@@ -70,6 +100,10 @@
                 <exclusion>
                     <groupId>io.grpc</groupId>
                     <artifactId>grpc-protobuf</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>com.google.guava</groupId>
+                    <artifactId>guava</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -106,6 +140,7 @@
             <artifactId>grpc-netty</artifactId>
             <version>1.4.0</version>
         </dependency>
+
     </dependencies>
     <dependencyManagement>
         <dependencies>

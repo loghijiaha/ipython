@@ -13,20 +13,10 @@ public class IPythonBuilderTest {
     final String name = "%text 5";
 
     @Test
-    public void testConfigRoundtrip() throws Exception {
-        FreeStyleProject project = jenkins.createFreeStyleProject();
-        project.getBuildersList().add(new IPythonBuilder(name));
-        project = jenkins.configRoundtrip(project);
-        jenkins.assertEqualDataBoundBeans(new IPythonBuilder(name), project.getBuildersList().get(0));
-    }
-
-
-
-    @Test
     public void testBuild() throws Exception {
         FreeStyleProject project = jenkins.createFreeStyleProject();
         IPythonBuilder builder =
-                new IPythonBuilder(name);
+                new IPythonBuilder("5");
         project.getBuildersList().add(builder);
 
         FreeStyleBuild build = jenkins.buildAndAssertSuccess(project);
