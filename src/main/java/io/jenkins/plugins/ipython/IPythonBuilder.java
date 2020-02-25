@@ -22,7 +22,7 @@ import java.io.IOException;
 public class IPythonBuilder extends Builder implements SimpleBuildStep {
 
     private final String line;
-    private IPythonKernalInterepreter interpreter = IPythonKernalInterepreter.getInstance();
+
 
     @DataBoundConstructor
     public IPythonBuilder(String line) throws Exception {
@@ -35,8 +35,13 @@ public class IPythonBuilder extends Builder implements SimpleBuildStep {
 
     @Override
     public void perform(Run<?, ?> run, FilePath workspace, Launcher launcher, TaskListener listener) throws InterruptedException, IOException {
+        try {
+            IPythonKernalInterepreter interpreter = IPythonKernalInterepreter.getInstance();
+            listener.getLogger().println(interpreter.sendAndInterpret(line));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        listener.getLogger().println(interpreter.sendAndInterpret(line));
     }
 
     @Extension

@@ -10,13 +10,13 @@ public class IPythonBuilderTest {
            @Rule
     public JenkinsRule jenkins = new JenkinsRule();
 
-    final String name = "%text 5";
+    final String name = "%text 37";
 
     @Test
     public void testBuild() throws Exception {
         FreeStyleProject project = jenkins.createFreeStyleProject();
         IPythonBuilder builder =
-                new IPythonBuilder("5");
+                new IPythonBuilder("32+5");
         project.getBuildersList().add(builder);
 
         FreeStyleBuild build = jenkins.buildAndAssertSuccess(project);
