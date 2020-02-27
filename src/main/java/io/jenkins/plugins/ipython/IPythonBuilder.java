@@ -4,6 +4,7 @@ import hudson.Extension;
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.model.AbstractProject;
+import hudson.model.Descriptor;
 import hudson.model.Run;
 import hudson.model.TaskListener;
 import hudson.tasks.BuildStepDescriptor;
@@ -23,7 +24,6 @@ public class IPythonBuilder extends Builder implements SimpleBuildStep {
 
     private final String line;
 
-
     @DataBoundConstructor
     public IPythonBuilder(String line) throws Exception {
         this.line = line;
@@ -37,23 +37,22 @@ public class IPythonBuilder extends Builder implements SimpleBuildStep {
     public void perform(Run<?, ?> run, FilePath workspace, Launcher launcher, TaskListener listener) throws InterruptedException, IOException {
         try {
             IPythonKernalInterepreter interpreter = IPythonKernalInterepreter.getInstance();
-            listener.getLogger().println(interpreter.sendAndInterpret(line));
+            listener.getLogger().println("Output : "+ interpreter.sendAndInterpret(line).toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
 
+
     @Extension
     public static final class DescriptorImpl extends BuildStepDescriptor<Builder> {
 
 
 
-        public FormValidation doCheckLine(@QueryParameter String value) {
+        public FormValidation doCheckLine(@QueryParameter String value) throws Exception {
             if (value.length() == 0)
-                return FormValidation.error("Enter the line");
-            if (value.length() < 4)
-                return FormValidation.warning("Too short");
+                return FormValidation.error("Enter the script");
             return FormValidation.ok();
         }
 
