@@ -38,17 +38,13 @@ public class IPythonKernalInterepreter {
     }
 
     public static IPythonKernalInterepreter getInstance() throws Exception {
-        if(instance == null){
-            synchronized (IPythonKernalInterepreter.class) {
-                if(instance == null){
-                    try {
-                        instance = new IPythonKernalInterepreter();
-                    } catch (InterpreterException e) {
-                        e.printStackTrace();
-                    }
+            if(instance == null){
+                try {
+                    instance = new IPythonKernalInterepreter();
+                } catch (InterpreterException e) {
+                    e.printStackTrace();
                 }
             }
-        }
         return instance;
     }
     public InterpreterResultMessageOutput sendAndInterpret(String script) throws InterruptedException {
