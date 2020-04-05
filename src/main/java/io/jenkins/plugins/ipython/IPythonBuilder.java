@@ -11,13 +11,11 @@ import hudson.tasks.BuildStepDescriptor;
 import hudson.tasks.Builder;
 import hudson.util.FormValidation;
 import io.jenkins.plugins.ipython.interpreter.IPythonKernalInterepreter;
-//import io.jenkins.plugins.ipython.interpreter.IPythonKernalInterepreter;
 import jenkins.tasks.SimpleBuildStep;
 import org.jenkinsci.Symbol;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.QueryParameter;
 
-import javax.servlet.ServletException;
 import java.io.IOException;
 
 public class IPythonBuilder extends Builder implements SimpleBuildStep {
@@ -25,7 +23,7 @@ public class IPythonBuilder extends Builder implements SimpleBuildStep {
     private final String line;
 
     @DataBoundConstructor
-    public IPythonBuilder(String line) throws Exception {
+    public IPythonBuilder(String line) {
         this.line = line;
     }
 
@@ -36,7 +34,9 @@ public class IPythonBuilder extends Builder implements SimpleBuildStep {
     @Override
     public void perform(Run<?, ?> run, FilePath workspace, Launcher launcher, TaskListener listener) throws InterruptedException, IOException {
         try {
+            // Interpreter wil be called or created if null
             IPythonKernalInterepreter interpreter = IPythonKernalInterepreter.getInstance();
+            // Console output
             listener.getLogger().println("Output : "+ interpreter.sendAndInterpret(line).toString());
         } catch (Exception e) {
             e.printStackTrace();
@@ -44,13 +44,11 @@ public class IPythonBuilder extends Builder implements SimpleBuildStep {
 
     }
 
-
+    @Symbol("python")
     @Extension
     public static final class DescriptorImpl extends BuildStepDescriptor<Builder> {
 
-
-
-        public FormValidation doCheckLine(@QueryParameter String value) throws Exception {
+        public FormValidation doCheckLine(@QueryParameter String value) {
             if (value.length() == 0)
                 return FormValidation.error("Enter the script");
             return FormValidation.ok();

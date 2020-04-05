@@ -23,6 +23,7 @@ public class IPythonKernalInterepreter {
     private IPythonKernalInterepreter() throws Exception {
         properties = new Properties();
         properties.setProperty("zeppelin.python.maxResult", "3");
+        // set local host as gateway
         properties.setProperty("zeppelin.python.gatewayserver_address", "127.0.0.1");
         interpreter = new LazyOpenInterpreter(new IPythonInterpreter(properties));
         InterpreterGroup mockInterpreterGroup = new InterpreterGroup();
@@ -38,6 +39,7 @@ public class IPythonKernalInterepreter {
     }
 
     public static IPythonKernalInterepreter getInstance() throws Exception {
+        // make sure one instance initiated for a session.
             if(instance == null){
                 try {
                     instance = new IPythonKernalInterepreter();
@@ -47,6 +49,7 @@ public class IPythonKernalInterepreter {
             }
         return instance;
     }
+
     public InterpreterResultMessageOutput sendAndInterpret(String script) throws InterruptedException {
 
         InterpreterResult result;
@@ -78,6 +81,7 @@ public class IPythonKernalInterepreter {
                 null,
                 new InterpreterOutput(null));
     }
+    // Close the port and instance
     public void shutdown() throws InterpreterException {
         interpreter.close();
     }

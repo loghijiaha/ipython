@@ -4,4 +4,14 @@
         <f:textarea />
     </f:entry>
 
+  <f:block>
+    <table>
+      <f:optionalBlock name="Test" title="Tests">
+        <f:entry title="Test scripts">
+          <f:textarea name="code"
+                     value="${scm.branch}"/>
+        </f:entry>
+      </f:optionalBlock>
+    </table>
+  </f:block>
 </j:jelly>
